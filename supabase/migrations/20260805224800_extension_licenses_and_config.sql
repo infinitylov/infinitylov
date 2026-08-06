@@ -1,0 +1,2 @@
+-- Applied remotely via MCP; kept for repo history
+-- See docs/ARCHITECTURE.md
