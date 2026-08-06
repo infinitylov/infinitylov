@@ -8,44 +8,44 @@ type Counts = Record<string, number>
 const OPTIONS: { id: string; label: string; hint: string; countKey: string }[] = [
   {
     id: 'licenses',
-    label: 'Todas as licenças / tokens',
-    hint: 'Apaga licenses + lotes (license_batches)',
+    label: 'Todas as licenças',
+    hint: 'Apaga licenças e lotes gerados',
     countKey: 'licenses',
   },
   {
     id: 'credit_orders',
     label: 'Pedidos PIX / crédito',
-    hint: 'Histórico de credit_orders',
+    hint: 'Histórico de pedidos de crédito',
     countKey: 'credit_orders',
   },
   {
     id: 'webhook_events',
     label: 'Eventos de webhook',
-    hint: 'Logs Kiwify/BlackCat etc.',
+    hint: 'Logs Kiwify, BlackCat etc.',
     countKey: 'webhook_events',
   },
   {
     id: 'subscriptions',
-    label: 'Subscriptions',
+    label: 'Assinaturas',
     hint: 'Assinaturas vinculadas',
     countKey: 'subscriptions',
   },
   {
     id: 'resellers',
     label: 'Linhas de revendedores',
-    hint: 'Saldo/créditos em resellers (contas Auth permanecem)',
+    hint: 'Saldo/créditos dos revendedores (contas Auth permanecem)',
     countKey: 'resellers',
   },
   {
     id: 'lesson_progress',
     label: 'Progresso de aulas',
-    hint: 'lesson_progress',
+    hint: 'Progresso das aulas dos alunos',
     countKey: 'lesson_progress',
   },
   {
     id: 'users_keep_admins',
     label: 'Usuários (manter só admins)',
-    hint: 'Remove members/resellers/support; mantém super_admin e admin',
+    hint: 'Remove membros, revendedores e suporte; mantém super admin e admin',
     countKey: 'users_to_delete',
   },
   {
@@ -57,7 +57,7 @@ const OPTIONS: { id: string; label: string; hint: string; countKey: string }[] =
   {
     id: 'pricing_tiers',
     label: 'Faixas de desconto',
-    hint: 'credit_pricing_tiers',
+    hint: 'Faixas de preço por volume',
     countKey: 'pricing_tiers',
   },
 ]
@@ -153,7 +153,7 @@ export function AdminPurgeButton() {
       <Modal open={open} onClose={() => setOpen(false)} title="Limpeza de dados">
         <div className="space-y-4">
           <p className="text-sm text-red-300">
-            Ação destrutiva. Escolha o que apagar. Admins (super_admin/admin) nunca são removidos.
+            Ação destrutiva. Escolha o que apagar. Contas de admin nunca são removidas.
           </p>
 
           <div className="flex gap-2">

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { callFunction, supabase } from '../../lib/supabase'
+import { sourceLabel } from '../../lib/labels'
 import { Button, ExtensionDownload, GlassField, IconButton, Modal, PageHeader, StatusPill } from '../../components/ui'
 
 type License = {
@@ -99,12 +100,12 @@ export function AdminLicensesPage() {
   }
 
   async function resetHwid(key: string) {
-    if (!confirm(`Resetar HWID de ${key}?`)) return
+    if (!confirm(`Resetar dispositivo vinculado de ${key}?`)) return
     setBusy(true)
     setMsg(null)
     try {
       await callFunction('admin-reset-device', { license_key: key }, { auth: true })
-      setMsg(`HWID resetado: ${key}`)
+      setMsg(`Dispositivo resetado: ${key}`)
       await load()
     } catch (e) {
       setMsg(e instanceof Error ? e.message : 'Erro')
@@ -188,11 +189,11 @@ export function AdminLicensesPage() {
           onChange={(e) => setStatus(e.target.value)}
           className="rounded-xl border border-border bg-surface px-3 py-2 text-sm text-foreground"
         >
-          <option value="all">Todos status</option>
-          <option value="unused">unused</option>
-          <option value="active">active</option>
-          <option value="revoked">revoked</option>
-          <option value="expired">expired</option>
+          <option value="all">Todos os status</option>
+          <option value="unused">Disponível</option>
+          <option value="active">Ativa</option>
+          <option value="revoked">Revogada</option>
+          <option value="expired">Expirada</option>
         </select>
         <Button variant="ghost" onClick={load}>
           Atualizar
@@ -215,7 +216,7 @@ export function AdminLicensesPage() {
             <tr>
               <th className="px-3 py-3">Chave</th>
               <th className="px-3 py-3">Status</th>
-              <th className="px-3 py-3">Source</th>
+              <th className="px-3 py-3">Origem</th>
               <th className="px-3 py-3">E-mail</th>
               <th className="px-3 py-3">Expira</th>
               <th className="px-3 py-3 text-right">Ações</th>
@@ -250,7 +251,7 @@ export function AdminLicensesPage() {
                   <td className="px-3 py-2.5">
                     <StatusPill status={r.status} />
                   </td>
-                  <td className="truncate px-3 py-2.5 text-muted-foreground">{r.source}</td>
+                  <td className="truncate px-3 py-2.5 text-muted-foreground">{sourceLabel(r.source)}</td>
                   <td className="truncate px-3 py-2.5 text-muted-foreground" title={r.bound_email || ''}>
                     {r.bound_email || '—'}
                   </td>
@@ -260,7 +261,7 @@ export function AdminLicensesPage() {
                   <td className="px-3 py-2.5">
                     <div className="flex items-center justify-end gap-1">
                       <IconButton
-                        label="Reset HWID"
+                        label="Resetar dispositivo"
                         disabled={busy || !r.hwid}
                         onClick={() => resetHwid(r.key)}
                       >

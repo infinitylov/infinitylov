@@ -109,7 +109,7 @@ export function AdminResellersPage() {
             <tr>
               <th className="px-3 py-3">E-mail</th>
               <th className="px-3 py-3">Créditos</th>
-              <th className="px-3 py-3">Lifetime</th>
+              <th className="px-3 py-3">Total histórico</th>
               <th className="px-3 py-3">Status</th>
               <th className="px-3 py-3">Notas</th>
             </tr>
@@ -134,7 +134,7 @@ export function AdminResellersPage() {
                   <td className="px-3 py-2.5 font-semibold text-white">{r.credits_remaining}</td>
                   <td className="px-3 py-2.5 text-muted-foreground">{r.credits_lifetime}</td>
                   <td className="px-3 py-2.5">
-                    <StatusPill status={r.active ? 'active' : 'revoked'} />
+                    <StatusPill status={r.active ? 'active' : 'inactive'} />
                   </td>
                   <td className="px-3 py-2.5 text-xs text-muted-foreground">{r.notes || '—'}</td>
                 </tr>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { useAuth } from '../lib/auth'
+import { statusLabel } from '../lib/labels'
 import { supabase } from '../lib/supabase'
 import { BrandMark, Button } from '../components/ui'
 
@@ -52,14 +53,14 @@ export function AccountPage() {
                 <code className="text-accent">{lic.key}</code>
               </p>
               <p>
-                <span className="text-muted-foreground">Status:</span> {lic.status}
+                <span className="text-muted-foreground">Status:</span> {statusLabel(lic.status)}
               </p>
               <p>
                 <span className="text-muted-foreground">Expira:</span>{' '}
                 {lic.expires_at ? new Date(lic.expires_at).toLocaleString('pt-BR') : '—'}
               </p>
               <p>
-                <span className="text-muted-foreground">HWID:</span> {lic.hwid || 'não vinculado'}
+                <span className="text-muted-foreground">Dispositivo:</span> {lic.hwid || 'não vinculado'}
               </p>
             </>
           ) : (

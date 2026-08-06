@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useEffect, type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react'
+import { statusLabel } from '../lib/labels'
 
 export function BrandWordmark({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
   const text = size === 'lg' ? 'text-4xl' : size === 'sm' ? 'text-xl' : 'text-3xl'
@@ -142,6 +143,7 @@ export function TextLink({ to, children }: { to: string; children: ReactNode }) 
 export function StatusPill({ status }: { status: string }) {
   const map: Record<string, string> = {
     active: 'border-success/40 bg-success/10 text-green-300 shadow-[0_0_12px_rgba(34,197,94,0.25)]',
+    inactive: 'border-muted-foreground/30 bg-muted text-muted-foreground',
     unused: 'border-brand-orange/40 bg-brand-orange/10 text-orange-200',
     revoked: 'border-danger/40 bg-danger/10 text-red-300',
     expired: 'border-muted-foreground/30 bg-muted text-muted-foreground',
@@ -150,7 +152,10 @@ export function StatusPill({ status }: { status: string }) {
     past_due: 'border-amber-400/40 bg-amber-400/10 text-amber-200',
     paid: 'border-success/40 bg-success/10 text-green-300 shadow-[0_0_12px_rgba(34,197,94,0.25)]',
     pending: 'border-brand-orange/40 bg-brand-orange/10 text-orange-200',
+    failed: 'border-danger/40 bg-danger/10 text-red-300',
     refunded: 'border-muted-foreground/30 bg-muted text-muted-foreground',
+    processed: 'border-success/40 bg-success/10 text-green-300 shadow-[0_0_12px_rgba(34,197,94,0.25)]',
+    error: 'border-danger/40 bg-danger/10 text-red-300',
   }
   const cls = map[status] || 'border-border bg-muted text-muted-foreground'
   return (
@@ -158,7 +163,7 @@ export function StatusPill({ status }: { status: string }) {
       {status === 'active' || status === 'paid' ? (
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-success" />
       ) : null}
-      {status}
+      {statusLabel(status)}
     </span>
   )
 }

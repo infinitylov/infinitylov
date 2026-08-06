@@ -155,7 +155,7 @@ export function AdminPacksPage() {
 
     if (error) setMsg(error.message)
     else {
-      setMsg(editingId ? 'Pack atualizado.' : 'Pack criado.')
+      setMsg(editingId ? 'Pacote atualizado.' : 'Pacote criado.')
       resetPackForm()
       await load()
     }
@@ -169,7 +169,7 @@ export function AdminPacksPage() {
     const { error } = await supabase.from('credit_packs').delete().eq('id', p.id)
     if (error) setMsg(error.message)
     else {
-      setMsg('Pack apagado.')
+      setMsg('Pacote apagado.')
       if (editingId === p.id) resetPackForm()
       await load()
     }
@@ -275,10 +275,10 @@ export function AdminPacksPage() {
           className="mb-4 grid max-w-3xl gap-3 rounded-2xl border border-border bg-surface p-4 sm:grid-cols-2"
         >
           {editingId ? (
-            <p className="sm:col-span-2 text-sm text-brand-orange">Editando pack — salve ou cancele.</p>
+            <p className="sm:col-span-2 text-sm text-brand-orange">Editando pacote — salve ou cancele.</p>
           ) : null}
           <GlassField
-            placeholder="Nome do pack"
+            placeholder="Nome do pacote"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -305,13 +305,13 @@ export function AdminPacksPage() {
             onChange={(e) => setSortOrder(Number(e.target.value) || 0)}
           />
           <GlassField
-            placeholder="Badge (ex: Mais vendido)"
+            placeholder="Selo (ex: Mais vendido)"
             value={badge}
             onChange={(e) => setBadge(e.target.value)}
           />
           <label className="flex items-center gap-2 text-sm text-muted-foreground">
             <input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} />
-            Destacar (featured)
+            Destacar na loja
           </label>
           <div className="flex flex-wrap items-end gap-2 sm:col-span-2">
             <Button type="submit" variant="gradient" loading={busy}>
@@ -332,7 +332,7 @@ export function AdminPacksPage() {
                 <th className="px-3 py-3">Nome</th>
                 <th className="px-3 py-3">Créditos</th>
                 <th className="px-3 py-3">Preço</th>
-                <th className="px-3 py-3">Badge</th>
+                <th className="px-3 py-3">Selo</th>
                 <th className="px-3 py-3">Ativo</th>
                 <th className="px-3 py-3" />
               </tr>
@@ -356,7 +356,7 @@ export function AdminPacksPage() {
                     <td className="px-3 py-2.5 text-white">
                       {r.name}
                       {r.featured ? (
-                        <span className="ml-2 text-[10px] uppercase text-brand-orange">featured</span>
+                        <span className="ml-2 text-[10px] uppercase text-brand-orange">destaque</span>
                       ) : null}
                     </td>
                     <td className="px-3 py-2.5">{r.credits}</td>
@@ -429,7 +429,7 @@ export function AdminPacksPage() {
           />
           <div className="sm:col-span-2 flex flex-wrap items-end gap-3">
             <label className="space-y-1 text-xs text-muted-foreground">
-              Preview qtd
+              Prévia da qtd
               <GlassField
                 type="number"
                 value={previewQty}
@@ -438,13 +438,13 @@ export function AdminPacksPage() {
             </label>
             {preview ? (
               <p className="text-sm text-muted-foreground">
-                {preview.credits} tokens →{' '}
+                {preview.credits} créditos →{' '}
                 <span className="font-semibold text-brand-pink">{formatBRL(preview.amount_cents)}</span>
-                {' '}({formatBRL(preview.unit_price_cents)}/token
+                {' '}({formatBRL(preview.unit_price_cents)}/crédito
                 {preview.discount_bps > 0 ? `, -${(preview.discount_bps / 100).toFixed(1)}%` : ''})
               </p>
             ) : (
-              <p className="text-sm text-red-400">Qtd fora da faixa ou personalizado off</p>
+              <p className="text-sm text-red-400">Qtd fora da faixa ou personalizado desligado</p>
             )}
           </div>
           <div>
@@ -469,18 +469,18 @@ export function AdminPacksPage() {
           <GlassField
             type="number"
             min={1}
-            placeholder="Min qtd"
+            placeholder="Qtd mín."
             value={tierMin}
             onChange={(e) => setTierMin(Number(e.target.value) || 1)}
           />
           <GlassField
             type="number"
-            placeholder="Max qtd (vazio = ∞)"
+            placeholder="Qtd máx. (vazio = ∞)"
             value={tierMax}
             onChange={(e) => setTierMax(e.target.value)}
           />
           <GlassField
-            placeholder="% desconto"
+            placeholder="% de desconto"
             value={tierPct}
             onChange={(e) => setTierPct(e.target.value)}
           />

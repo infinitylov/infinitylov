@@ -40,7 +40,7 @@ export function ResellerRegisterPage() {
   }
 
   return (
-    <AuthShell title="Revenda — Cadastro" subtitle="Crie sua conta e compre tokens por PIX">
+    <AuthShell title="Revenda — Cadastro" subtitle="Crie sua conta e compre créditos por PIX">
       <form onSubmit={onSubmit} className="space-y-3">
         <GlassField
           placeholder="Nome completo"

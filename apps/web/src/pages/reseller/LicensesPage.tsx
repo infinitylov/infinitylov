@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { callFunction, supabase } from '../../lib/supabase'
 import { useAuth } from '../../lib/auth'
+import { statusLabel } from '../../lib/labels'
 import { Button, GlassField, Modal, PageHeader, StatusPill } from '../../components/ui'
 
 type License = {
@@ -118,7 +119,7 @@ export function ResellerLicensesPage() {
               filter === s ? 'gradient-brand text-white' : 'bg-muted text-muted-foreground'
             }`}
           >
-            {s === 'all' ? 'todas' : s}
+            {s === 'all' ? 'Todas' : statusLabel(s)}
           </button>
         ))}
       </div>

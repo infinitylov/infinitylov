@@ -37,7 +37,7 @@ export function ResellerLoginPage() {
   }
 
   return (
-    <AuthShell title="Revenda — Entrar" subtitle="Compre tokens InfinityLov via PIX">
+    <AuthShell title="Revenda — Entrar" subtitle="Compre créditos InfinityLov via PIX">
       <form onSubmit={onSubmit} className="space-y-3">
         <GlassField
           type="email"

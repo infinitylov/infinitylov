@@ -193,7 +193,7 @@ export function ResellerBuyPage() {
       : selection?.mode === 'pack'
         ? `Comprar — ${selection.pack.name}`
         : selection?.mode === 'custom'
-          ? `Personalizado — ${selection.credits} tokens`
+          ? `Personalizado — ${selection.credits} créditos`
           : 'Checkout'
 
   return (
@@ -261,7 +261,7 @@ export function ResellerBuyPage() {
                       >
                         {formatBRL(pack.amount_cents)}
                       </p>
-                      <p className="text-[11px] text-muted-foreground">total</p>
+                      <p className="text-[11px] text-muted-foreground">Total</p>
                     </div>
                     <p className="mt-2 text-xs text-muted-foreground">
                       {formatBRL(unit)} por crédito

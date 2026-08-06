@@ -3,7 +3,7 @@ import { useAuth } from '../lib/auth'
 import { Button, ExtensionDownload } from './ui'
 
 const nav = [
-  { to: '/admin', end: true, label: 'Dashboard' },
+  { to: '/admin', end: true, label: 'Painel' },
   { to: '/admin/licencas', label: 'Licenças' },
   { to: '/admin/usuarios', label: 'Usuários' },
   { to: '/admin/revendedores', label: 'Revendedores' },
@@ -26,7 +26,7 @@ export function RequireStaff({ children }: { children: React.ReactNode }) {
       <div className="flex h-dvh flex-col items-center justify-center gap-3 px-4 text-center">
         <p className="text-lg font-semibold">Sem acesso ao painel</p>
         <p className="max-w-sm text-sm text-muted-foreground">
-          Sua conta não tem permissão de admin/support. A área de membros chega em breve.
+          Sua conta não tem permissão de admin ou suporte. A área de membros chega em breve.
         </p>
         <Button variant="ghost" onClick={() => signOut()}>
           Sair

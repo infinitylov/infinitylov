@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
+import { roleLabel } from '../../lib/labels'
 import { PageHeader, GlassField } from '../../components/ui'
 
 type ProfileRow = {
@@ -39,7 +40,8 @@ export function AdminUsersPage() {
     return (
       (r.email || '').toLowerCase().includes(s) ||
       (r.full_name || '').toLowerCase().includes(s) ||
-      r.role.includes(s)
+      r.role.includes(s) ||
+      roleLabel(r.role).toLowerCase().includes(s)
     )
   })
 
@@ -48,14 +50,14 @@ export function AdminUsersPage() {
     const { error } = await supabase.from('profiles').update({ role }).eq('id', id)
     if (error) setMsg(error.message)
     else {
-      setMsg(`Role atualizada → ${role}`)
+      setMsg(`Função atualizada → ${roleLabel(role)}`)
       await load()
     }
   }
 
   return (
     <div>
-      <PageHeader title="Usuários" description="Perfis e roles (alteração protegida no banco)." />
+      <PageHeader title="Usuários" description="Perfis e funções (alteração protegida no banco)." />
       <div className="mb-4">
         <GlassField
           placeholder="Buscar e-mail / nome…"
@@ -71,7 +73,7 @@ export function AdminUsersPage() {
             <tr>
               <th className="px-3 py-3">E-mail</th>
               <th className="px-3 py-3">Nome</th>
-              <th className="px-3 py-3">Role</th>
+              <th className="px-3 py-3">Função</th>
               <th className="px-3 py-3">Criado</th>
             </tr>
           </thead>
@@ -95,7 +97,7 @@ export function AdminUsersPage() {
                     >
                       {(r.role === 'reseller' ? (['reseller', ...ROLES] as const) : ROLES).map((role) => (
                         <option key={role} value={role}>
-                          {role}
+                          {roleLabel(role)}
                         </option>
                       ))}
                     </select>

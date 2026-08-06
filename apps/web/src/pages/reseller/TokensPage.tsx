@@ -89,7 +89,7 @@ export function ResellerTokensPage() {
         <>
           <div className="mb-6 grid gap-3 sm:grid-cols-2">
             <StatCard label="Créditos disponíveis" value={credits} />
-            <StatCard label="Créditos lifetime" value={lifetime} />
+            <StatCard label="Créditos (histórico)" value={lifetime} />
           </div>
 
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
@@ -100,7 +100,7 @@ export function ResellerTokensPage() {
               <thead className="border-b border-border text-xs uppercase text-muted-foreground">
                 <tr>
                   <th className="px-3 py-3">Data</th>
-                  <th className="px-3 py-3">Tokens</th>
+                  <th className="px-3 py-3">Créditos</th>
                   <th className="px-3 py-3">Valor</th>
                   <th className="px-3 py-3">Status</th>
                   <th className="px-3 py-3" />

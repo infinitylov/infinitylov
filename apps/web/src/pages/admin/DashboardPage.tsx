@@ -107,7 +107,7 @@ export function AdminDashboardPage() {
     () =>
       [
         { name: 'Ativas', key: 'active', value: stats.active },
-        { name: 'Unused', key: 'unused', value: stats.unused },
+        { name: 'Disponíveis', key: 'unused', value: stats.unused },
         { name: 'Revogadas', key: 'revoked', value: stats.revoked },
         { name: 'Expiradas', key: 'expired', value: stats.expired },
       ].filter((d) => d.value > 0),
@@ -127,7 +127,7 @@ export function AdminDashboardPage() {
   return (
     <div>
       <PageHeader
-        title="Dashboard"
+        title="Painel"
         description="Visão operacional de licenças e eventos."
         actions={
           <div className="flex flex-wrap gap-2">
@@ -144,7 +144,7 @@ export function AdminDashboardPage() {
         <div className="space-y-6">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
             <StatCard label="Ativas" value={stats.active} />
-            <StatCard label="Unused" value={stats.unused} />
+            <StatCard label="Disponíveis" value={stats.unused} />
             <StatCard label="Revogadas" value={stats.revoked} />
             <StatCard label="Expiradas" value={stats.expired} />
             <StatCard label="Webhooks" value={stats.webhooks} />

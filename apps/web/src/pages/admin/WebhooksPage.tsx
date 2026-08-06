@@ -37,7 +37,7 @@ export function AdminWebhooksPage() {
             <tr>
               <th className="px-3 py-3">Quando</th>
               <th className="px-3 py-3">Tipo</th>
-              <th className="px-3 py-3">Event ID</th>
+              <th className="px-3 py-3">ID do evento</th>
               <th className="px-3 py-3">Status</th>
               <th className="px-3 py-3">Erro</th>
             </tr>
@@ -66,7 +66,7 @@ export function AdminWebhooksPage() {
                     {r.event_id.slice(0, 18)}…
                   </td>
                   <td className="px-3 py-2.5">
-                    <StatusPill status={r.processed_at ? 'active' : r.error ? 'revoked' : 'unused'} />
+                    <StatusPill status={r.processed_at ? 'processed' : r.error ? 'error' : 'pending'} />
                   </td>
                   <td className="max-w-[200px] truncate px-3 py-2.5 text-xs text-red-300">
                     {r.error || '—'}
