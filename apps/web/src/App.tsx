@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './lib/auth'
 import { LoginPage } from './pages/LoginPage'
 import { ActivateLicensePage } from './pages/ActivateLicensePage'
+import { RescueLicensePage } from './pages/RescueLicensePage'
 import { AdminShell } from './components/AdminShell'
 import { AdminDashboardPage } from './pages/admin/DashboardPage'
 import { AdminLicensesPage } from './pages/admin/LicensesPage'
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/ativar-licenca" element={<ActivateLicensePage />} />
+        <Route path="/resgatar-licenca" element={<RescueLicensePage />} />
         <Route path="/admin" element={<AdminShell />}>
           <Route index element={<AdminDashboardPage />} />
           <Route path="licencas" element={<AdminLicensesPage />} />

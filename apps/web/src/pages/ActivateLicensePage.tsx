@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { AuthShell, Button, ExtensionDownload, GlassField } from '../components/ui'
+import { AuthShell, Button, ExtensionDownload, GlassField, GlowLink } from '../components/ui'
 import { callFunction } from '../lib/supabase'
 
 type ActivateResponse = {
@@ -13,7 +13,7 @@ type ActivateResponse = {
 
 const LOVABLE_URL = 'https://lovable.dev'
 
-/** Página separada: /ativar-licenca (não ligada ao login admin) */
+/** Página separada: /ativar-licenca (parceiros — chave unused) */
 export function ActivateLicensePage() {
   const [key, setKey] = useState('')
   const [email, setEmail] = useState('')
@@ -43,7 +43,7 @@ export function ActivateLicensePage() {
   }
 
   return (
-    <AuthShell title="Ativar licença">
+    <AuthShell title="Ativar licença" subtitle="Comprou com parceiro? Informe a chave e o e-mail.">
       <form onSubmit={onSubmit} className="space-y-3">
         <GlassField
           placeholder="INLO-XXXXX-XXXXX-XXXXX"
@@ -70,6 +70,10 @@ export function ActivateLicensePage() {
           Depois de ativar, instale a extensão no Chrome
         </p>
         <ExtensionDownload className="w-full" variant="ghost" label="Baixar extensão (.zip)" />
+        <div className="mt-4 text-center">
+          <p className="mb-2 text-xs text-muted-foreground">Já comprou na Kiwify?</p>
+          <GlowLink to="/resgatar-licenca">Resgatar licença</GlowLink>
+        </div>
       </div>
     </AuthShell>
   )

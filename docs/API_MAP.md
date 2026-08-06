@@ -24,6 +24,7 @@
 | Function | JWT | Status | Uso |
 |----------|-----|--------|-----|
 | `activate-license` | off | OK | `/ativar-licenca`: unused → active + user (só e-mail; sem session) |
+| `lookup-license` | off | OK | `/resgatar-licenca`: e-mail → chaves `active` (Kiwify) |
 | `admin-reset-device` | on | OK | Zera HWID (admin/support) |
 | `admin-revoke-license` | on | OK | Revoga chave (admin) |
 | `admin-grant-reseller` | on | OK | Promove user + créditos (admin) |
@@ -37,6 +38,13 @@
 { "license_key": "INLO-…", "email": "a@b.com" }
 ```
 Resposta: `{ ok, activated, expires_at, license_key, message }` (sem session).
+
+**`lookup-license`**
+```json
+{ "email": "a@b.com" }
+```
+Resposta: `{ ok, licenses: [{ key, expires_at, source }], message? }`
+
 **`admin-grant-reseller`**
 ```json
 { "email": "rev@x.com", "credits": 50, "notes": "PIX 04/08" }

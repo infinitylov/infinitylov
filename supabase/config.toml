@@ -432,6 +432,9 @@ verify_jwt = false
 [functions.activate-license]
 verify_jwt = false
 
+[functions.lookup-license]
+verify_jwt = false
+
 [functions.admin-reset-device]
 verify_jwt = true
 
