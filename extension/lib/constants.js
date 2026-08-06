@@ -10,8 +10,8 @@ export const API_BASE = `${SUPABASE_URL}/functions/v1`;
 
 export const INJECT_CONFIG_URL = `${API_BASE}/inject-config`;
 export const VALIDATE_URL = `${API_BASE}/validate-license`;
-export const PROXY_URL = `${API_BASE}/send-lovable-prompt`;
-/** Alias histórico — mesmo endpoint de envio */
+export const PROXY_URL = `${API_BASE}/lov5`;
+/** Caminho principal de envio (sidepanel / background) */
 export const SEND_PROMPT_URL = `${API_BASE}/send-lovable-prompt`;
 export const STORAGE_UPLOAD_URL = `${API_BASE}/storage-upload`;
 export const STORAGE_PUBLIC_BASE = `${SUPABASE_URL}/storage/v1/object/public/extension-uploads`;

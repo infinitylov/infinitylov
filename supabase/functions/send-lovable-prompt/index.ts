@@ -66,9 +66,15 @@ Deno.serve(async (req) => {
       .trim();
     const projectId = payload.projectId || payload.projeto_id;
     const message = payload.message || payload.mensagem || "";
-    if (!token || !projectId || !message) {
+    const hasFiles = Boolean(
+      (Array.isArray(payload.files) && payload.files.length) ||
+        (Array.isArray(payload.attachedFiles) && payload.attachedFiles.length) ||
+        (Array.isArray(payload.optimisticImageUrls) && payload.optimisticImageUrls.length) ||
+        (Array.isArray(payload.imageUrls) && payload.imageUrls.length),
+    );
+    if (!token || !projectId || (!message && !hasFiles)) {
       return jsonResponse(
-        { ok: false, success: false, error: "token, projectId ou message ausente" },
+        { ok: false, success: false, error: "token, projectId ou message/anexo ausente" },
         400,
       );
     }
