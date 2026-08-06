@@ -34,9 +34,9 @@
 
 **`activate-license`**
 ```json
-{ "license_key": "INLO-…", "email": "a@b.com", "password": "********" }
+{ "license_key": "INLO-…", "email": "a@b.com" }
 ```
-
+Resposta: `{ ok, activated, expires_at, license_key, message }` (sem session).
 **`admin-grant-reseller`**
 ```json
 { "email": "rev@x.com", "credits": 50, "notes": "PIX 04/08" }
