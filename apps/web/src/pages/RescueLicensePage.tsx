@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { AuthShell, Button, ExtensionDownload, GlassField, GlowLink } from '../components/ui'
+import { AuthShell, Button, ExtensionDownload, GlassField } from '../components/ui'
 import { callFunction } from '../lib/supabase'
 
 type LicenseHit = {
@@ -53,7 +53,7 @@ export function RescueLicensePage() {
   }
 
   return (
-    <AuthShell title="Resgatar licença" subtitle="Comprou na Kiwify? Informe o e-mail da compra.">
+    <AuthShell title="Resgatar licença" subtitle="Informe o e-mail da compra para ver sua chave.">
       <form onSubmit={onSubmit} className="space-y-3">
         <GlassField
           type="email"
@@ -92,7 +92,6 @@ export function RescueLicensePage() {
                   {lic.expires_at
                     ? `Expira ${new Date(lic.expires_at).toLocaleDateString('pt-BR')}`
                     : 'Sem expiração'}
-                  {lic.source ? ` · ${lic.source}` : ''}
                 </span>
                 <button
                   type="button"
@@ -104,13 +103,14 @@ export function RescueLicensePage() {
               </div>
             </div>
           ))}
-          <ExtensionDownload className="w-full" variant="ghost" label="Baixar extensão (.zip)" />
         </div>
       ) : null}
 
-      <div className="mt-6 border-t border-white/10 pt-5 text-center">
-        <p className="mb-2 text-xs text-muted-foreground">Comprou com parceiro?</p>
-        <GlowLink to="/ativar-licenca">Ativar chave unused</GlowLink>
+      <div className="mt-6 border-t border-white/10 pt-5">
+        <p className="mb-3 text-center text-xs text-muted-foreground">
+          Instale a extensão no Chrome
+        </p>
+        <ExtensionDownload className="w-full" variant="ghost" label="Baixar extensão (.zip)" />
       </div>
     </AuthShell>
   )
