@@ -66,6 +66,12 @@ export function AdminShell() {
             ))}
           </nav>
           <div className="border-t border-border p-2">
+            <NavLink
+              to="/ativar-licenca"
+              className="mb-1 block rounded-xl px-2.5 py-2 text-center text-xs font-semibold text-muted-foreground transition hover:bg-white/5 hover:text-white"
+            >
+              Ativar licença
+            </NavLink>
             <ExtensionDownload className="mb-2 w-full !px-2 !py-1.5 text-xs" label="Extensão" />
             <p className="mb-2 truncate text-[10px] text-muted-foreground" title={profile?.email ?? ''}>
               {profile?.email}
