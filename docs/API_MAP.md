@@ -23,7 +23,7 @@
 
 | Function | JWT | Status | Uso |
 |----------|-----|--------|-----|
-| `activate-license` | off | OK | `/ativar-licenca`: unused → active + user + session |
+| `activate-license` | off | OK | `/ativar-licenca`: unused → active + user (só e-mail; sem session) |
 | `admin-reset-device` | on | OK | Zera HWID (admin/support) |
 | `admin-revoke-license` | on | OK | Revoga chave (admin) |
 | `admin-grant-reseller` | on | OK | Promove user + créditos (admin) |

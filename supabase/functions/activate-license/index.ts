@@ -1,5 +1,10 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 import { handleOptions, jsonResponse, adminClient } from "../_shared/cors.ts";
+
+function randomPassword(bytes = 24): string {
+  const buf = new Uint8Array(bytes);
+  crypto.getRandomValues(buf);
+  return Array.from(buf, (b) => b.toString(16).padStart(2, "0")).join("");
+}
 
 Deno.serve(async (req) => {
   const opt = handleOptions(req);
@@ -10,10 +15,9 @@ Deno.serve(async (req) => {
     const body = await req.json();
     const key = String(body.license_key || body.key || "").trim().toUpperCase();
     const email = String(body.email || "").trim().toLowerCase();
-    const password = String(body.password || "");
 
-    if (!key || !email || password.length < 8) {
-      return jsonResponse({ ok: false, error: "Informe chave, e-mail e senha (mín. 8)." }, 400);
+    if (!key || !email || !email.includes("@")) {
+      return jsonResponse({ ok: false, error: "Informe chave e e-mail." }, 400);
     }
 
     const sb = adminClient();
@@ -44,11 +48,10 @@ Deno.serve(async (req) => {
         return jsonResponse({ ok: false, error: "Este e-mail já possui acesso ativo." }, 409);
       }
       userId = profile.id;
-      await sb.auth.admin.updateUserById(userId, { password, email_confirm: true });
     } else {
       const { data: created, error: createErr } = await sb.auth.admin.createUser({
         email,
-        password,
+        password: randomPassword(),
         email_confirm: true,
         app_metadata: { role: "member" },
       });
@@ -92,28 +95,12 @@ Deno.serve(async (req) => {
       });
     }
 
-    const anon = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_ANON_KEY")!,
-      { auth: { persistSession: false, autoRefreshToken: false } },
-    );
-    const { data: sessionData, error: signErr } = await anon.auth.signInWithPassword({ email, password });
-    if (signErr) {
-      return jsonResponse({
-        ok: true,
-        activated: true,
-        message: "Licença ativada. Faça login com e-mail e senha.",
-        expires_at: expiresAt.toISOString(),
-      });
-    }
-
     return jsonResponse({
       ok: true,
       activated: true,
       expires_at: expiresAt.toISOString(),
       license_key: key,
-      session: sessionData.session,
-      user: sessionData.user,
+      message: "Licença ativada. Use a extensão Chrome com a mesma chave.",
     });
   } catch (e) {
     return jsonResponse({ ok: false, error: String(e) }, 500);
