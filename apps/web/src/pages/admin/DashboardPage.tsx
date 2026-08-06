@@ -14,7 +14,7 @@ import {
   YAxis,
 } from 'recharts'
 import { supabase } from '../../lib/supabase'
-import { PageHeader, StatCard } from '../../components/ui'
+import { ExtensionDownload, PageHeader, StatCard } from '../../components/ui'
 
 type Counts = {
   active: number
@@ -125,7 +125,11 @@ export function AdminDashboardPage() {
 
   return (
     <div>
-      <PageHeader title="Dashboard" description="Visão operacional de licenças e eventos." />
+      <PageHeader
+        title="Dashboard"
+        description="Visão operacional de licenças e eventos."
+        actions={<ExtensionDownload variant="gradient" label="Baixar extensão Chrome" />}
+      />
       {loading ? (
         <div className="flex justify-center py-16">
           <span className="neon-spinner" />

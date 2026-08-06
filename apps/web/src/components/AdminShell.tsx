@@ -1,6 +1,6 @@
 import { NavLink, Outlet, Navigate } from 'react-router-dom'
 import { useAuth } from '../lib/auth'
-import { Button } from './ui'
+import { Button, ExtensionDownload } from './ui'
 
 const nav = [
   { to: '/admin', end: true, label: 'Dashboard' },
@@ -66,6 +66,7 @@ export function AdminShell() {
             ))}
           </nav>
           <div className="border-t border-border p-2">
+            <ExtensionDownload className="mb-2 w-full !px-2 !py-1.5 text-xs" label="Extensão" />
             <p className="mb-2 truncate text-[10px] text-muted-foreground" title={profile?.email ?? ''}>
               {profile?.email}
             </p>

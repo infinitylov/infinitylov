@@ -186,6 +186,39 @@ export function StatCard({ label, value }: { label: string; value: string | numb
   )
 }
 
+export const EXTENSION_ZIP_URL = '/downloads/InfinityLov-ext.zip'
+
+export function ExtensionDownload({
+  variant = 'ghost',
+  className = '',
+  label = 'Baixar extensão',
+}: {
+  variant?: 'primary' | 'ghost' | 'gradient' | 'danger'
+  className?: string
+  label?: string
+}) {
+  return (
+    <a
+      href={EXTENSION_ZIP_URL}
+      download="InfinityLov-ext.zip"
+      className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition ${
+        variant === 'gradient'
+          ? 'gradient-brand text-white btn-glow hover:brightness-110'
+          : variant === 'primary'
+            ? 'bg-primary text-white hover:brightness-110'
+            : 'border border-border/80 bg-white/5 text-foreground hover:bg-white/10'
+      } ${className}`}
+    >
+      <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <path d="M12 3v12" strokeLinecap="round" />
+        <path d="M7 10l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M5 19h14" strokeLinecap="round" />
+      </svg>
+      {label}
+    </a>
+  )
+}
+
 export function IconButton({
   label,
   variant = 'ghost',

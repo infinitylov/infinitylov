@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { AuthShell, Button, GlassField } from '../components/ui'
+import { AuthShell, Button, ExtensionDownload, GlassField } from '../components/ui'
 import { callFunction, supabase } from '../lib/supabase'
 
 type ActivateResponse = {
@@ -80,6 +80,12 @@ export function ActivateLicensePage() {
           {busy ? 'Ativando…' : 'Ativar'}
         </Button>
       </form>
+      <div className="mt-6 border-t border-white/10 pt-5">
+        <p className="mb-3 text-center text-xs text-muted-foreground">
+          Depois de ativar, instale a extensão no Chrome
+        </p>
+        <ExtensionDownload className="w-full" variant="ghost" label="Baixar extensão (.zip)" />
+      </div>
     </AuthShell>
   )
 }

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { callFunction, supabase } from '../../lib/supabase'
-import { Button, GlassField, IconButton, Modal, PageHeader, StatusPill } from '../../components/ui'
+import { Button, ExtensionDownload, GlassField, IconButton, Modal, PageHeader, StatusPill } from '../../components/ui'
 
 type License = {
   key: string
@@ -167,9 +167,12 @@ export function AdminLicensesPage() {
         title="Licenças"
         description="Listar, gerar, resetar dispositivo e revogar."
         actions={
-          <Button variant="gradient" onClick={openModal}>
-            Gerar lote
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <ExtensionDownload />
+            <Button variant="gradient" onClick={openModal}>
+              Gerar lote
+            </Button>
+          </div>
         }
       />
 
