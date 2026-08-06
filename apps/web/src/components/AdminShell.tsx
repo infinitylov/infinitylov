@@ -7,7 +7,7 @@ const nav = [
   { to: '/admin/licencas', label: 'Licenças' },
   { to: '/admin/usuarios', label: 'Usuários' },
   { to: '/admin/revendedores', label: 'Revendedores' },
-  { to: '/admin/packs', label: 'Packs' },
+  { to: '/admin/packs', label: 'Packs e preços' },
   { to: '/admin/webhooks', label: 'Webhooks' },
 ]
 

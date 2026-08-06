@@ -13,6 +13,7 @@ import { AdminResellersPage } from './pages/admin/ResellersPage'
 import { AdminPacksPage } from './pages/admin/PacksPage'
 import { ResellerTokensPage } from './pages/reseller/TokensPage'
 import { ResellerBuyPage } from './pages/reseller/BuyPage'
+import { ResellerLicensesPage } from './pages/reseller/LicensesPage'
 import { ResellerLoginPage } from './pages/reseller/LoginPage'
 import { ResellerRegisterPage } from './pages/reseller/RegisterPage'
 
@@ -37,7 +38,7 @@ export default function App() {
         <Route path="/revendedor" element={<ResellerShell />}>
           <Route index element={<ResellerTokensPage />} />
           <Route path="comprar" element={<ResellerBuyPage />} />
-          <Route path="licencas" element={<Navigate to="/revendedor" replace />} />
+          <Route path="licencas" element={<ResellerLicensesPage />} />
         </Route>
         <Route path="/membros/*" element={<Navigate to="/login" replace />} />
         <Route path="*" element={<Navigate to="/login" replace />} />

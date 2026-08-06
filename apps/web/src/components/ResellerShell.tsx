@@ -3,7 +3,8 @@ import { useAuth } from '../lib/auth'
 import { Button, ExtensionDownload } from './ui'
 
 const nav = [
-  { to: '/revendedor', end: true, label: 'Meus tokens' },
+  { to: '/revendedor', end: true, label: 'Saldo' },
+  { to: '/revendedor/licencas', label: 'Licenças' },
   { to: '/revendedor/comprar', label: 'Comprar' },
 ]
 

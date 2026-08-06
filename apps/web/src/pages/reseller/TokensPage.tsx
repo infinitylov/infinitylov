@@ -67,12 +67,17 @@ export function ResellerTokensPage() {
   return (
     <div>
       <PageHeader
-        title="Meus tokens"
-        description="Saldo e histórico de compras PIX."
+        title="Saldo e pedidos"
+        description="Créditos disponíveis e histórico de compras PIX. Gere chaves em Licenças."
         actions={
-          <Link to="/revendedor/comprar">
-            <Button variant="gradient">Comprar tokens</Button>
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link to="/revendedor/licencas">
+              <Button variant="ghost">Gerar licenças</Button>
+            </Link>
+            <Link to="/revendedor/comprar">
+              <Button variant="gradient">Comprar créditos</Button>
+            </Link>
+          </div>
         }
       />
 
@@ -83,8 +88,8 @@ export function ResellerTokensPage() {
       ) : (
         <>
           <div className="mb-6 grid gap-3 sm:grid-cols-2">
-            <StatCard label="Tokens disponíveis" value={credits} />
-            <StatCard label="Tokens comprados (lifetime)" value={lifetime} />
+            <StatCard label="Créditos disponíveis" value={credits} />
+            <StatCard label="Créditos lifetime" value={lifetime} />
           </div>
 
           <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
