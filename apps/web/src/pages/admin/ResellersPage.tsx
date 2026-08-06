@@ -69,7 +69,7 @@ export function AdminResellersPage() {
     <div>
       <PageHeader
         title="Revendedores"
-        description="Promover usuário e adicionar créditos (PIX externo)."
+        description="Promover usuário e adicionar créditos manuais (além do PIX BlackCat)."
       />
 
       <form

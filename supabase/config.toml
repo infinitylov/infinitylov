@@ -435,6 +435,18 @@ verify_jwt = false
 [functions.lookup-license]
 verify_jwt = false
 
+[functions.reseller-register]
+verify_jwt = false
+
+[functions.reseller-create-checkout]
+verify_jwt = true
+
+[functions.reseller-order-status]
+verify_jwt = true
+
+[functions.blackcat-webhook]
+verify_jwt = false
+
 [functions.admin-reset-device]
 verify_jwt = true
 

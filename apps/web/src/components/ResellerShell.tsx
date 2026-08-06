@@ -3,16 +3,12 @@ import { useAuth } from '../lib/auth'
 import { Button, ExtensionDownload } from './ui'
 
 const nav = [
-  { to: '/admin', end: true, label: 'Dashboard' },
-  { to: '/admin/licencas', label: 'Licenças' },
-  { to: '/admin/usuarios', label: 'Usuários' },
-  { to: '/admin/revendedores', label: 'Revendedores' },
-  { to: '/admin/packs', label: 'Packs' },
-  { to: '/admin/webhooks', label: 'Webhooks' },
+  { to: '/revendedor', end: true, label: 'Meus tokens' },
+  { to: '/revendedor/comprar', label: 'Comprar' },
 ]
 
-export function RequireStaff({ children }: { children: React.ReactNode }) {
-  const { loading, user, isStaff, signOut } = useAuth()
+export function RequireReseller({ children }: { children: React.ReactNode }) {
+  const { loading, user, isReseller, isAdmin, signOut } = useAuth()
   if (loading) {
     return (
       <div className="flex h-dvh items-center justify-center">
@@ -20,14 +16,11 @@ export function RequireStaff({ children }: { children: React.ReactNode }) {
       </div>
     )
   }
-  if (!user) return <Navigate to="/login" replace />
-  if (!isStaff) {
+  if (!user) return <Navigate to="/revendedor/login" replace />
+  if (!isReseller && !isAdmin) {
     return (
       <div className="flex h-dvh flex-col items-center justify-center gap-3 px-4 text-center">
-        <p className="text-lg font-semibold">Sem acesso ao painel</p>
-        <p className="max-w-sm text-sm text-muted-foreground">
-          Sua conta não tem permissão de admin/support. A área de membros chega em breve.
-        </p>
+        <p className="text-lg font-semibold">Sem acesso de revendedor</p>
         <Button variant="ghost" onClick={() => signOut()}>
           Sair
         </Button>
@@ -37,17 +30,18 @@ export function RequireStaff({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }
 
-export function AdminShell() {
+export function ResellerShell() {
   const { profile, signOut } = useAuth()
 
   return (
-    <RequireStaff>
+    <RequireReseller>
       <div className="flex h-dvh overflow-hidden bg-background">
         <aside className="hidden h-full w-36 shrink-0 flex-col border-r border-border bg-surface md:flex">
           <div className="border-b border-border px-3 py-4">
             <p className="truncate text-sm font-extrabold tracking-tight">
               Infinity<span className="brand-lov">Lov</span>
             </p>
+            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">Revenda</p>
           </div>
           <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto p-2 scrollbar-brand">
             {nav.map((item) => (
@@ -68,18 +62,6 @@ export function AdminShell() {
             ))}
           </nav>
           <div className="border-t border-border p-2">
-            <NavLink
-              to="/ativar-licenca"
-              className="mb-1 block rounded-xl px-2.5 py-2 text-center text-xs font-semibold text-muted-foreground transition hover:bg-white/5 hover:text-white"
-            >
-              Ativar licença
-            </NavLink>
-            <NavLink
-              to="/resgatar-licenca"
-              className="mb-1 block rounded-xl px-2.5 py-2 text-center text-xs font-semibold text-muted-foreground transition hover:bg-white/5 hover:text-white"
-            >
-              Resgatar licença
-            </NavLink>
             <ExtensionDownload className="mb-2 w-full !px-2 !py-1.5 text-xs" label="Extensão" />
             <p className="mb-2 truncate text-[10px] text-muted-foreground" title={profile?.email ?? ''}>
               {profile?.email}
@@ -120,6 +102,6 @@ export function AdminShell() {
           </main>
         </div>
       </div>
-    </RequireStaff>
+    </RequireReseller>
   )
 }

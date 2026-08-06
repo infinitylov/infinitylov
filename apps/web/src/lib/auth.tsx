@@ -25,6 +25,8 @@ type AuthCtx = {
   role: AppRole | null
   loading: boolean
   isStaff: boolean
+  isReseller: boolean
+  isAdmin: boolean
   signIn: (email: string, password: string) => Promise<Profile | null>
   signOut: () => Promise<void>
   refreshProfile: () => Promise<Profile | null>
@@ -86,6 +88,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const role = profile?.role ?? null
   const isStaff = role === 'super_admin' || role === 'admin' || role === 'support'
+  const isReseller = role === 'reseller'
+  const isAdmin = role === 'super_admin' || role === 'admin'
 
   const value: AuthCtx = {
     session,
@@ -94,6 +98,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     role,
     loading,
     isStaff,
+    isReseller,
+    isAdmin,
     refreshProfile,
     async signIn(email, password) {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
@@ -117,6 +123,6 @@ export function useAuth() {
 
 export function staffHomePath(role: AppRole | null): string {
   if (role === 'super_admin' || role === 'admin' || role === 'support') return '/admin'
-  if (role === 'reseller') return '/admin' // A2: /revendedor — por ora admin grant only
+  if (role === 'reseller') return '/revendedor'
   return '/login'
 }

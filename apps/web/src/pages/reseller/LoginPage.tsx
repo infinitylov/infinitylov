@@ -1,19 +1,18 @@
 import { useState, type FormEvent } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { useAuth, staffHomePath } from '../lib/auth'
-import { AuthShell, Button, GlassField, TextLink } from '../components/ui'
+import { useAuth } from '../../lib/auth'
+import { AuthShell, Button, GlassField, TextLink } from '../../components/ui'
 
-export function LoginPage() {
-  const { signIn, user, loading, isStaff, isReseller, role } = useAuth()
+export function ResellerLoginPage() {
+  const { signIn, signOut, user, loading, isReseller, isStaff } = useAuth()
   const nav = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [busy, setBusy] = useState(false)
 
-  if (!loading && user && (isStaff || isReseller)) {
-    return <Navigate to={staffHomePath(role)} replace />
-  }
+  if (!loading && user && isReseller) return <Navigate to="/revendedor" replace />
+  if (!loading && user && isStaff) return <Navigate to="/admin" replace />
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault()
@@ -22,12 +21,13 @@ export function LoginPage() {
     try {
       const p = await signIn(email, password)
       const r = p?.role ?? null
-      if (r === 'super_admin' || r === 'admin' || r === 'support') {
-        nav('/admin')
-      } else if (r === 'reseller') {
+      if (r === 'reseller') {
         nav('/revendedor')
+      } else if (r === 'super_admin' || r === 'admin' || r === 'support') {
+        nav('/admin')
       } else {
-        setError('Conta sem acesso ao painel.')
+        setError('Conta sem acesso de revendedor. Cadastre-se como revenda.')
+        await signOut()
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Falha no login')
@@ -37,7 +37,7 @@ export function LoginPage() {
   }
 
   return (
-    <AuthShell title="Admin — Entrar" subtitle="Painel interno InfinityLov">
+    <AuthShell title="Revenda — Entrar" subtitle="Compre tokens InfinityLov via PIX">
       <form onSubmit={onSubmit} className="space-y-3">
         <GlassField
           type="email"
@@ -62,7 +62,7 @@ export function LoginPage() {
         </Button>
       </form>
       <p className="mt-4 text-center text-sm text-muted-foreground">
-        É revendedor? <TextLink to="/revendedor/login">Entrar na revenda</TextLink>
+        Ainda não tem conta? <TextLink to="/revendedor/cadastro">Cadastre-se</TextLink>
       </p>
     </AuthShell>
   )

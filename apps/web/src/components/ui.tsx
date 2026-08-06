@@ -146,12 +146,18 @@ export function StatusPill({ status }: { status: string }) {
     revoked: 'border-danger/40 bg-danger/10 text-red-300',
     expired: 'border-muted-foreground/30 bg-muted text-muted-foreground',
     canceled: 'border-danger/40 bg-danger/10 text-red-300',
+    cancelled: 'border-danger/40 bg-danger/10 text-red-300',
     past_due: 'border-amber-400/40 bg-amber-400/10 text-amber-200',
+    paid: 'border-success/40 bg-success/10 text-green-300 shadow-[0_0_12px_rgba(34,197,94,0.25)]',
+    pending: 'border-brand-orange/40 bg-brand-orange/10 text-orange-200',
+    refunded: 'border-muted-foreground/30 bg-muted text-muted-foreground',
   }
   const cls = map[status] || 'border-border bg-muted text-muted-foreground'
   return (
     <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${cls}`}>
-      {status === 'active' ? <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-success" /> : null}
+      {status === 'active' || status === 'paid' ? (
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-success" />
+      ) : null}
       {status}
     </span>
   )
