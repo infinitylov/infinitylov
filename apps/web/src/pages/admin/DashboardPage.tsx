@@ -15,6 +15,7 @@ import {
 } from 'recharts'
 import { supabase } from '../../lib/supabase'
 import { ExtensionDownload, PageHeader, StatCard } from '../../components/ui'
+import { AdminPurgeButton } from '../../components/AdminPurgeButton'
 
 type Counts = {
   active: number
@@ -128,7 +129,12 @@ export function AdminDashboardPage() {
       <PageHeader
         title="Dashboard"
         description="Visão operacional de licenças e eventos."
-        actions={<ExtensionDownload variant="gradient" label="Baixar extensão Chrome" />}
+        actions={
+          <div className="flex flex-wrap gap-2">
+            <AdminPurgeButton />
+            <ExtensionDownload variant="gradient" label="Baixar extensão Chrome" />
+          </div>
+        }
       />
       {loading ? (
         <div className="flex justify-center py-16">

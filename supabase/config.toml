@@ -447,6 +447,9 @@ verify_jwt = true
 [functions.blackcat-webhook]
 verify_jwt = false
 
+[functions.admin-purge]
+verify_jwt = true
+
 [functions.admin-reset-device]
 verify_jwt = true
 
